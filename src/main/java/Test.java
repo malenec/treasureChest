@@ -23,20 +23,27 @@ public class Test
 
 		TopBox top = new TopBox();
 		Geometry3D topBox3D = top.topBox(csg);
+		topBox3D = csg.rotate3DY(csg.degrees(180)).transform(topBox3D);
+		topBox3D = csg.translate3D(150, 0, -2.3).transform(topBox3D);
 
 		Geometry3D bottomAndTop = csg.union3D(bottomBox3D, topBox3D);
 
 		Geometry3D cylinder = csg.cylinder3D(4, 25, 360, false);
-		Geometry3D plate1 = csg.box3D(2, 3.5, 5, false);
-		plate1 = csg.translate3D(0, 3.5, 0).transform(plate1);
-		Geometry3D plate2 = csg.box3D(2, 3.5, 5, false);
-		plate2 = csg.translate3D(0, 3.5, 10).transform(plate2);
-		Geometry3D plate3 = csg.box3D(2, 3.5, 5, false);
-		plate3 = csg.translate3D(0, 3.5, 20).transform(plate3);
-		Geometry3D plate4 = csg.box3D(2, 5, 25, false);
-		plate4 = csg.translate3D(0, 7, 0).transform(plate4);
+		Geometry3D plateHole = csg.box3D(5, 2, 4, false);
+		plateHole = csg.translate3D(-17.5, -29.5, 1).transform(plateHole);
+		Geometry3D plateHole2 = csg.translate3D(-10, 0, 0).transform(plateHole);
+		Geometry3D plateHole3 = csg.translate3D(35, 0, 0).transform(plateHole);
+		Geometry3D plateHole4 = csg.translate3D(45, 0, 0).transform(plateHole);
+		bottomAndTop = csg.difference3D(bottomAndTop, plateHole, plateHole2, plateHole3, plateHole4);
 
-		Geometry3D kombi = csg.union3D(cylinder, plate1, plate2, plate3, plate4, bottomAndTop);
+		Geometry3D cylinderCombined = csg.union3D(cylinder);
+		cylinderCombined = csg.rotate3DX(csg.degrees(90)).transform(cylinderCombined);
+		cylinderCombined = csg.rotate3DZ(csg.degrees(90)).transform(cylinderCombined);
+		cylinderCombined = csg.translate3D(0, -29.5, 0).transform(cylinderCombined);
+		cylinderCombined = csg.translate3D(10, 0, 0).transform(cylinderCombined);
+		Geometry3D cylinderCombined2 = csg.translate3D(-45, 0, 0).transform(cylinderCombined);
+		Geometry3D totalCylinder = csg.union3D(bottomAndTop, cylinderCombined, cylinderCombined2);
+		//csg.view(totalBottomBox);
 
 		//inner split
 		Geometry2D circle = csg.circle2D(4.5, 64);
@@ -47,7 +54,7 @@ public class Test
 		Geometry3D ext2 = csg.linearExtrude( 4, false, circle2);
 
 		Geometry2D pie = csg.cutoutPie2D(11, csg.degrees(0), csg.degrees(60));
-		pie = csg.rotate2D(csg.degrees(-120)).transform(pie);
+		pie = csg.rotate2D(csg.degrees(-80)).transform(pie);
 
 		Geometry3D ext3 = csg.linearExtrude( 4, false, pie);
 
@@ -59,10 +66,18 @@ public class Test
 
 		Geometry3D grip2 = csg.translate3DZ(10).transform(grip);
 
-		Geometry3D plate5 = csg.box3D(2, 5, 25, false);
-		plate5 = csg.translate3D(0, -4.8, 0).transform(plate5);
+		//Geometry3D plate5 = csg.box3D(2, 5, 25, false);
+		//plate5 = csg.translate3D(0, -4.8, 0).transform(plate5);
+		Geometry3D gribCombined = csg.union3D(grip, grip2);
+		gribCombined = csg.rotate3DX(csg.degrees(90)).transform(gribCombined);
+		gribCombined = csg.rotate3DZ(csg.degrees(90)).transform(gribCombined);
+		gribCombined = csg.translate3D(0, -29.5, 0).transform(gribCombined);
+		gribCombined = csg.translate3D(10, 0, 0).transform(gribCombined);
+		Geometry3D gribCombined2 = csg.translate3D(-45, 0, 0).transform(gribCombined);
+		Geometry3D totalGribs = csg.union3D(gribCombined, gribCombined2);
 
-		Geometry3D total = csg.union3D(grip, grip2, plate5, kombi, bottomAndTop, holes);
+
+		Geometry3D total = csg.union3D(totalGribs, totalCylinder, bottomAndTop, holes);
 		total = csg.difference3D(total, microUSBHole);
 
 		csg.view(total);
