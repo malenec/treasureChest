@@ -24,7 +24,7 @@ public class Test
 
 		//the top half of the box
 		TopBox top = new TopBox();
-		Geometry3D topBox3D = top.getTopBox(csg);
+		Geometry3D topBox3D = top.getRoundedTopBox(csg);
 		Geometry3D gribs = top.getGribs(csg);
 		Geometry3D completeTopBox = csg.union3D(topBox3D, gribs);
 //		csg.view(completeTopBox);

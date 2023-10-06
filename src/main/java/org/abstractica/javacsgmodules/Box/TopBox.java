@@ -11,17 +11,36 @@ public class TopBox {
     {
     }
 
-    public Geometry3D getTopBox(JavaCSG csg)
+    public Geometry3D getSquaredTopBox(JavaCSG csg)
     {
         //outer box size
         Geometry3D outerTopBox = csg.box3D(95, 65, 20, false);
 
         //inner box size (cutout)
-        Geometry3D innerTopBox = csg.box3D(90, 60, 15, false);
-        innerTopBox = csg.translate3D(0, 0, 5).transform(innerTopBox);
-        Geometry3D totalTopBox = csg.difference3D(outerTopBox, innerTopBox);
+        Geometry3D innerTopBox = csg.box3D(90, 60, 17.5, false);
+        innerTopBox = csg.translate3D(0, 0, 2.5).transform(innerTopBox);
+        Geometry3D totalSquaredTopBox = csg.difference3D(outerTopBox, innerTopBox);
 
-        return totalTopBox;
+        return totalSquaredTopBox;
+    }
+
+    public Geometry3D getRoundedTopBox(JavaCSG csg)
+    {
+        //outer cylinder size
+        Geometry3D outerTopCylinder = csg.cylinder3D(65, 95, 360, false);
+        outerTopCylinder = csg.rotate3DY(csg.degrees(90)).transform(outerTopCylinder);
+        outerTopCylinder = csg.translate3D(-47.5, 0, 20).transform(outerTopCylinder);
+        Geometry3D cutoutBox = csg.box3D(95, 65, 32.5, false);
+        cutoutBox = csg.translate3D(0, 0, 20).transform(cutoutBox);
+        outerTopCylinder = csg.difference3D(outerTopCylinder, cutoutBox);
+
+        //inner cylinder size (cutout)
+        Geometry3D innerTopCylinder = csg.cylinder3D(60, 90, 360, false);
+        innerTopCylinder = csg.rotate3DY(csg.degrees(90)).transform(innerTopCylinder);
+        innerTopCylinder = csg.translate3D(-45, 0, 22.5).transform(innerTopCylinder);
+        Geometry3D totalRoundedTopBox = csg.difference3D(outerTopCylinder, innerTopCylinder);
+
+        return totalRoundedTopBox;
     }
 
     public Geometry3D getGribs(JavaCSG csg)
