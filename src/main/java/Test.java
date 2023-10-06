@@ -27,7 +27,7 @@ public class Test
 		Geometry3D topBox3D = top.getTopBox(csg);
 		Geometry3D gribs = top.getGribs(csg);
 		Geometry3D completeTopBox = csg.union3D(topBox3D, gribs);
-		//csg.view(completeTopBox);
+//		csg.view(completeTopBox);
 
 		//the complete box
 		completeTopBox = csg.rotate3DY(csg.degrees(180)).transform(completeTopBox);

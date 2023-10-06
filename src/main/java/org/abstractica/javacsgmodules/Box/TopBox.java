@@ -36,7 +36,7 @@ public class TopBox {
 
         //pie (cutout)
         Geometry2D pie = csg.cutoutPie2D(11, csg.degrees(0), csg.degrees(60));
-        pie = csg.rotate2D(csg.degrees(-160)).transform(pie);
+        pie = csg.rotate2D(csg.degrees(-180)).transform(pie);
         Geometry3D ext3 = csg.linearExtrude( 4, false, pie);
 
         //first grip
