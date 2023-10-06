@@ -6,8 +6,6 @@ import org.abstractica.javacsgmodules.Box.TopBox;
 
 public class Test
 {
-
-
 	public static void main(String[] args)
 	{
 		JavaCSG csg = JavaCSGFactory.createDefault();
@@ -22,7 +20,7 @@ public class Test
 		Geometry3D holesForGrips = bottom.getHolesForGrips(csg);
 		bottomBox3D = csg.difference3D(bottomBox3D, holesForGrips);
 		Geometry3D completeBottomBox = csg.union3D(bottomBox3D, cylindersForNodeMCU, cylindersForGribs);
-		//csg.view(completeBottomBox);
+//		csg.view(completeBottomBox);
 
 		//the top half of the box
 		TopBox top = new TopBox();

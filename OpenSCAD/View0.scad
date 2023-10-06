@@ -243,7 +243,7 @@ union()
                                             }
                                             linear_extrude(height = 4.0, twist = 0.0, scale = 1.0, slices = 1, center = false)
                                             {
-                                                rotate(-80.00000000000001)
+                                                rotate(-160.00000000000003)
                                                 {
                                                     M739();
                                                 }
@@ -275,7 +275,7 @@ union()
                                                 }
                                                 linear_extrude(height = 4.0, twist = 0.0, scale = 1.0, slices = 1, center = false)
                                                 {
-                                                    rotate(-80.00000000000001)
+                                                    rotate(-160.00000000000003)
                                                     {
                                                         M739();
                                                     }
@@ -320,7 +320,7 @@ union()
                                                 }
                                                 linear_extrude(height = 4.0, twist = 0.0, scale = 1.0, slices = 1, center = false)
                                                 {
-                                                    rotate(-80.00000000000001)
+                                                    rotate(-160.00000000000003)
                                                     {
                                                         M739();
                                                     }
@@ -352,7 +352,7 @@ union()
                                                     }
                                                     linear_extrude(height = 4.0, twist = 0.0, scale = 1.0, slices = 1, center = false)
                                                     {
-                                                        rotate(-80.00000000000001)
+                                                        rotate(-160.00000000000003)
                                                         {
                                                             M739();
                                                         }
