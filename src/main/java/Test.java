@@ -20,9 +20,9 @@ public class Test
 		Geometry3D holesForGrips = bottom.getHolesForGrips(csg);
 		bottomBox3D = csg.difference3D(bottomBox3D, holesForGrips);
 		Geometry3D buttonHolder = bottom.getButtonHolder(csg);
-		Geometry3D edgesForLito = bottom.getEdgesForLito(csg);
-		Geometry3D completeBottomBox = csg.union3D(bottomBox3D, cylindersForNodeMCU, cylindersForGribs, buttonHolder, edgesForLito);
-		csg.view(completeBottomBox);
+		Geometry3D edgesForLitophane = bottom.getEdgesForLitophane(csg);
+		Geometry3D completeBottomBox = csg.union3D(bottomBox3D, cylindersForNodeMCU, cylindersForGribs, buttonHolder, edgesForLitophane);
+		csg.view(buttonHolder);
 
 		//the top half of the box
 		TopBox top = new TopBox();

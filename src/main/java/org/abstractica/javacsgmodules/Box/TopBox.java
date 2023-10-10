@@ -6,7 +6,6 @@ import org.abstractica.javacsg.JavaCSG;
 
 public class TopBox {
 
-
     public TopBox()
     {
     }

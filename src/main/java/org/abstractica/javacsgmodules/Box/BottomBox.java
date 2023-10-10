@@ -14,7 +14,6 @@ public class BottomBox {
     {
     }
 
-
     public Geometry3D getBottomBox (JavaCSG csg)
     {
         //outer box size
@@ -78,41 +77,44 @@ public class BottomBox {
         return totalHolesForGribs;
     }
 
-    public Geometry3D getButtonHolder(JavaCSG csg){
-
+    public Geometry3D getButtonHolder(JavaCSG csg)
+    {
         //button holder
-        Geometry3D outerButtonHolder = csg.box3D(9.5, 17.5, 11, false);
+        Geometry3D outerButtonHolder = csg.box3D(17.5, 9.5, 11, false);
 
         //cutout for button
-        Geometry3D cutoutForButton = csg.box3D(6.5, 14.5, 9.5, false);
+        Geometry3D cutoutForButton = csg.box3D(14.5, 6.5, 9.5, false);
         cutoutForButton = csg.translate3DZ(1.5).transform(cutoutForButton);
 
         //cutout for button legs
-        Geometry3D cutoutForButtonLegs = csg.box3D(2, 16, 1.5, false);
-        cutoutForButtonLegs = csg.translate3DY(-1.5).transform(cutoutForButtonLegs);
+        Geometry3D cutoutForButtonLegs = csg.box3D(16, 2, 1.5, false);
+        cutoutForButtonLegs = csg.translate3DX(0.75).transform(cutoutForButtonLegs);
 
-        //cutout for side cutout
-        Geometry3D sideCutout = csg.box3D(2, 1.5, 11, false);
-        sideCutout = csg.translate3DY(-8).transform(sideCutout);
+        //cutout for side slide in
+        Geometry3D sideCutout = csg.box3D(1.5, 2, 11, false);
+        sideCutout = csg.translate3DX(8).transform(sideCutout);
 
         Geometry3D buttonHolder = csg.difference3D(outerButtonHolder, cutoutForButton, cutoutForButtonLegs, sideCutout);
-        buttonHolder = csg.rotate3DZ(csg.degrees(90)).transform(buttonHolder);
         buttonHolder = csg.translate3D(-42.25, 31.75, 54).transform(buttonHolder);
 
         return buttonHolder;
     }
 
-    public Geometry3D getEdgesForLito(JavaCSG csg){
+    public Geometry3D getEdgesForLitophane(JavaCSG csg)
+    {
+        //edges for litophane - long sides
         Geometry3D edge1 = csg.box3D(100, 1.5, 1.5, false);
         edge1 = csg.translate3D(0, 34.5, 47.5).transform(edge1);
         Geometry3D edge2 = csg.translate3D(0, -69,0).transform(edge1);
 
+        //edges for litophane - short sides
         Geometry3D edge3 = csg.box3D(70, 1.5, 1.5, false);
         edge3 = csg.rotate3DZ(csg.degrees(90)).transform(edge3);
         edge3 = csg.translate3D(49.5, 0, 47.5).transform(edge3);
         Geometry3D edge4 = csg.translate3D(-99, 0,0).transform(edge3);
 
         Geometry3D edgesCombined = csg.union3D(edge1, edge2, edge3, edge4);
+
         return edgesCombined;
     }
 
