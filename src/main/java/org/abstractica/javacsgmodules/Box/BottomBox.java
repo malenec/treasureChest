@@ -110,8 +110,14 @@ public class BottomBox {
         //edges for litophane - short sides
         Geometry3D edge3 = csg.box3D(70, 1.5, 1.5, false);
         edge3 = csg.rotate3DZ(csg.degrees(90)).transform(edge3);
-        edge3 = csg.translate3D(49.5, 0, 47.5).transform(edge3);
-        Geometry3D edge4 = csg.translate3D(-99, 0,0).transform(edge3);
+        edge3 = csg.translate3D(-49.5, 0, 47.5).transform(edge3);
+        Geometry3D edge4 = csg.translate3D(99, 0,0).transform(edge3);
+
+        //cutout for cords from button to nodeMCU
+        Geometry3D cutoutForCord1 = csg.box3D(2, 1.5, 1.5, false);
+        cutoutForCord1 = csg.translate3D(-46.5, 34.5, 47.5).transform(cutoutForCord1);
+        Geometry3D cutoutForCord2 = csg.translate3D(8.5, 0,0).transform(cutoutForCord1);
+        edge1 = csg.difference3D(edge1, cutoutForCord1, cutoutForCord2);
 
         Geometry3D edgesCombined = csg.union3D(edge1, edge2, edge3, edge4);
 
