@@ -19,8 +19,10 @@ public class Test
 		Geometry3D cylindersForGribs = bottom.getCylindersForGribs(csg);
 		Geometry3D holesForGrips = bottom.getHolesForGrips(csg);
 		bottomBox3D = csg.difference3D(bottomBox3D, holesForGrips);
-		Geometry3D completeBottomBox = csg.union3D(bottomBox3D, cylindersForNodeMCU, cylindersForGribs);
-//		csg.view(completeBottomBox);
+		Geometry3D buttonHolder = bottom.getButtonHolder(csg);
+		Geometry3D edgesForLito = bottom.getEdgesForLito(csg);
+		Geometry3D completeBottomBox = csg.union3D(bottomBox3D, cylindersForNodeMCU, cylindersForGribs, buttonHolder, edgesForLito);
+		csg.view(completeBottomBox);
 
 		//the top half of the box
 		TopBox top = new TopBox();
@@ -30,9 +32,9 @@ public class Test
 //		csg.view(completeTopBox);
 
 		//the complete box
-		completeTopBox = csg.rotate3DY(csg.degrees(180)).transform(completeTopBox);
-		completeTopBox = csg.translate3D(0, 0, 75.75).transform(completeTopBox);
-		Geometry3D completeBottomAndTop = csg.union3D(completeBottomBox, completeTopBox);
-		csg.view(completeBottomAndTop);
+//		completeTopBox = csg.rotate3DY(csg.degrees(180)).transform(completeTopBox);
+//		completeTopBox = csg.translate3D(0, 0, 85.75).transform(completeTopBox);
+//		Geometry3D completeBottomAndTop = csg.union3D(completeBottomBox, completeTopBox);
+//		csg.view(completeBottomAndTop);
 	}
 }

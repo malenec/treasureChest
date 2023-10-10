@@ -14,10 +14,10 @@ public class TopBox {
     public Geometry3D getSquaredTopBox(JavaCSG csg)
     {
         //outer box size
-        Geometry3D outerTopBox = csg.box3D(95, 65, 20, false);
+        Geometry3D outerTopBox = csg.box3D(105, 75, 20, false);
 
         //inner box size (cutout)
-        Geometry3D innerTopBox = csg.box3D(90, 60, 17.5, false);
+        Geometry3D innerTopBox = csg.box3D(100, 70, 17.5, false);
         innerTopBox = csg.translate3D(0, 0, 2.5).transform(innerTopBox);
         Geometry3D totalSquaredTopBox = csg.difference3D(outerTopBox, innerTopBox);
 
@@ -27,17 +27,17 @@ public class TopBox {
     public Geometry3D getRoundedTopBox(JavaCSG csg)
     {
         //outer cylinder size
-        Geometry3D outerTopCylinder = csg.cylinder3D(65, 95, 360, false);
+        Geometry3D outerTopCylinder = csg.cylinder3D(75, 105, 360, false);
         outerTopCylinder = csg.rotate3DY(csg.degrees(90)).transform(outerTopCylinder);
-        outerTopCylinder = csg.translate3D(-47.5, 0, 20).transform(outerTopCylinder);
-        Geometry3D cutoutBox = csg.box3D(95, 65, 32.5, false);
+        outerTopCylinder = csg.translate3D(-52.5, 0, 20).transform(outerTopCylinder);
+        Geometry3D cutoutBox = csg.box3D(105, 75, 37.5, false);
         cutoutBox = csg.translate3D(0, 0, 20).transform(cutoutBox);
         outerTopCylinder = csg.difference3D(outerTopCylinder, cutoutBox);
 
         //inner cylinder size (cutout)
-        Geometry3D innerTopCylinder = csg.cylinder3D(60, 90, 360, false);
+        Geometry3D innerTopCylinder = csg.cylinder3D(70, 100, 360, false);
         innerTopCylinder = csg.rotate3DY(csg.degrees(90)).transform(innerTopCylinder);
-        innerTopCylinder = csg.translate3D(-45, 0, 22.5).transform(innerTopCylinder);
+        innerTopCylinder = csg.translate3D(-50, 0, 22.5).transform(innerTopCylinder);
         Geometry3D totalRoundedTopBox = csg.difference3D(outerTopCylinder, innerTopCylinder);
 
         return totalRoundedTopBox;
@@ -70,7 +70,7 @@ public class TopBox {
         Geometry3D gribsCombined = csg.union3D(grip, grip2);
         gribsCombined = csg.rotate3DX(csg.degrees(90)).transform(gribsCombined);
         gribsCombined = csg.rotate3DZ(csg.degrees(90)).transform(gribsCombined);
-        gribsCombined = csg.translate3D(10.5, 31.25, 22.25).transform(gribsCombined);
+        gribsCombined = csg.translate3D(10.5, 36.25, 22.25).transform(gribsCombined);
 
         //the second set of grips
         Geometry3D gribsCombined2 = csg.translate3D(-35, 0, 0).transform(gribsCombined);
