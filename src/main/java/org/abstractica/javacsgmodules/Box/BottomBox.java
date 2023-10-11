@@ -47,7 +47,7 @@ public class BottomBox {
         return USBhole;
     }
 
-    public Geometry3D getCylindersForGribs(JavaCSG csg)
+    public Geometry3D getCylindersForGrips(JavaCSG csg)
     {
         //first cylinder for grip (the one on the plus side of the x-axis)
         Geometry3D cylinderForGrip = csg.cylinder3D(4, 15, 360, false);
@@ -66,15 +66,15 @@ public class BottomBox {
     public Geometry3D getHolesForGrips(JavaCSG csg)
     {
         //the two holes on the plus side of the x-axis
-        Geometry3D holeForGrib = csg.box3D(5, 2.5, 4, false);
-        holeForGrib = csg.translate3D(12.5, 31.25, 48).transform(holeForGrib);
-        Geometry3D holeForGrib2 = csg.translate3D(10, 0, 0).transform(holeForGrib);
+        Geometry3D holeForGrip = csg.box3D(5, 2.5, 4, false);
+        holeForGrip = csg.translate3D(12.5, 36.25, 58).transform(holeForGrip);
+        Geometry3D holeForGrip2 = csg.translate3D(10, 0, 0).transform(holeForGrip);
 
         //the two holes on the minus side of the x-axis
-        Geometry3D holeForGrib3 = csg.translate3D(-25, 0, 0).transform(holeForGrib);
-        Geometry3D holeForGrib4 = csg.translate3D(-35, 0, 0).transform(holeForGrib);
-        Geometry3D totalHolesForGribs = csg.union3D(holeForGrib, holeForGrib2, holeForGrib3, holeForGrib4);
-        return totalHolesForGribs;
+        Geometry3D holeForGrip3 = csg.translate3D(-25, 0, 0).transform(holeForGrip);
+        Geometry3D holeForGrip4 = csg.translate3D(-35, 0, 0).transform(holeForGrip);
+        Geometry3D totalHolesForGrips = csg.union3D(holeForGrip, holeForGrip2, holeForGrip3, holeForGrip4);
+        return totalHolesForGrips;
     }
 
     public Geometry3D getButtonHolder(JavaCSG csg)
@@ -95,27 +95,26 @@ public class BottomBox {
         sideCutout = csg.translate3DX(8).transform(sideCutout);
 
         Geometry3D buttonHolder = csg.difference3D(outerButtonHolder, cutoutForButton, cutoutForButtonLegs, sideCutout);
-        buttonHolder = csg.translate3D(-42.25, 31.75, 54).transform(buttonHolder);
+        buttonHolder = csg.translate3D(-42.75, 31.75, 54).transform(buttonHolder);
 
         return buttonHolder;
     }
 
-    public Geometry3D getEdgesForLitophane(JavaCSG csg)
+    public Geometry3D getEdgesForLithophane(JavaCSG csg)
     {
-        //edges for litophane - long sides
-        Geometry3D edge1 = csg.box3D(100, 1.5, 1.5, false);
-        edge1 = csg.translate3D(0, 34.5, 47.5).transform(edge1);
-        Geometry3D edge2 = csg.translate3D(0, -69,0).transform(edge1);
+        //edges for lithophane - long sides
+        Geometry3D edge1 = csg.box3D(100, 2, 1.5, false);
+        edge1 = csg.translate3D(0, 34, 47.5).transform(edge1);
+        Geometry3D edge2 = csg.translate3D(0, -68,0).transform(edge1);
 
-        //edges for litophane - short sides
-        Geometry3D edge3 = csg.box3D(70, 1.5, 1.5, false);
-        edge3 = csg.rotate3DZ(csg.degrees(90)).transform(edge3);
-        edge3 = csg.translate3D(-49.5, 0, 47.5).transform(edge3);
-        Geometry3D edge4 = csg.translate3D(99, 0,0).transform(edge3);
+        //edges for lithophane - short sides
+        Geometry3D edge3 = csg.box3D(2, 70, 1.5, false);
+        edge3 = csg.translate3D(-49, 0, 47.5).transform(edge3);
+        Geometry3D edge4 = csg.translate3D(98, 0,0).transform(edge3);
 
         //cutout for cords from button to nodeMCU
-        Geometry3D cutoutForCord1 = csg.box3D(2, 1.5, 1.5, false);
-        cutoutForCord1 = csg.translate3D(-46.5, 34.5, 47.5).transform(cutoutForCord1);
+        Geometry3D cutoutForCord1 = csg.box3D(2, 2, 1.5, false);
+        cutoutForCord1 = csg.translate3D(-47, 34, 47.5).transform(cutoutForCord1);
         Geometry3D cutoutForCord2 = csg.translate3D(8.5, 0,0).transform(cutoutForCord1);
         edge1 = csg.difference3D(edge1, cutoutForCord1, cutoutForCord2);
 

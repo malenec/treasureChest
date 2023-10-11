@@ -42,7 +42,7 @@ public class TopBox {
         return totalRoundedTopBox;
     }
 
-    public Geometry3D getGribs(JavaCSG csg)
+    public Geometry3D getGrips(JavaCSG csg)
     {
         //outer circle
         Geometry2D circle2 = csg.circle2D(8.5, 360);
@@ -66,17 +66,26 @@ public class TopBox {
         Geometry3D grip2 = csg.translate3DZ(10).transform(grip);
 
         //the set of grips combined
-        Geometry3D gribsCombined = csg.union3D(grip, grip2);
-        gribsCombined = csg.rotate3DX(csg.degrees(90)).transform(gribsCombined);
-        gribsCombined = csg.rotate3DZ(csg.degrees(90)).transform(gribsCombined);
-        gribsCombined = csg.translate3D(10.5, 36.25, 22.25).transform(gribsCombined);
+        Geometry3D gripsCombined = csg.union3D(grip, grip2);
+        gripsCombined = csg.rotate3DX(csg.degrees(90)).transform(gripsCombined);
+        gripsCombined = csg.rotate3DZ(csg.degrees(90)).transform(gripsCombined);
+        gripsCombined = csg.translate3D(10.5, 36.25, 22.25).transform(gripsCombined);
 
         //the second set of grips
-        Geometry3D gribsCombined2 = csg.translate3D(-35, 0, 0).transform(gribsCombined);
+        Geometry3D gripsCombined2 = csg.translate3D(-35, 0, 0).transform(gripsCombined);
 
         //the two sets of grips combined
-        Geometry3D totalGribs = csg.union3D(gribsCombined, gribsCombined2);
+        Geometry3D totalGrips = csg.union3D(gripsCombined, gripsCombined2);
 
-        return totalGribs;
+        return totalGrips;
+    }
+
+    public Geometry3D getButtonClicker(JavaCSG csg)
+    {
+        //button clicker
+        Geometry3D buttonClicker = csg.box3D(16, 8, 5, false);
+        buttonClicker = csg.translate3D(42, 31, 15).transform(buttonClicker);
+
+        return buttonClicker;
     }
 }
