@@ -83,8 +83,8 @@ public class TopBox {
     public Geometry3D getButtonClicker(JavaCSG csg)
     {
         //button clicker
-        Geometry3D buttonClicker = csg.box3D(16, 8, 5, false);
-        buttonClicker = csg.translate3D(42, 31, 15).transform(buttonClicker);
+        Geometry3D buttonClicker = csg.box3D(7.175, 7.23, 5, false);
+        buttonClicker = csg.translate3D(46.4125, 31.385, 15).transform(buttonClicker);
 
         return buttonClicker;
     }

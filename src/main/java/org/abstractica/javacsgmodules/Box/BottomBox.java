@@ -80,22 +80,22 @@ public class BottomBox {
     public Geometry3D getButtonHolder(JavaCSG csg)
     {
         //button holder
-        Geometry3D outerButtonHolder = csg.box3D(17.5, 9.5, 11, false);
+        Geometry3D outerButtonHolder = csg.box3D(15.45, 8.33, 8.7, false);
 
         //cutout for button
-        Geometry3D cutoutForButton = csg.box3D(14.5, 6.5, 9.5, false);
-        cutoutForButton = csg.translate3DZ(1.5).transform(cutoutForButton);
+        Geometry3D cutoutForButton = csg.box3D(13.25, 6.13, 6.7, false);
+        cutoutForButton = csg.translate3DZ(2).transform(cutoutForButton);
 
         //cutout for button legs
-        Geometry3D cutoutForButtonLegs = csg.box3D(16, 2, 1.5, false);
-        cutoutForButtonLegs = csg.translate3DX(0.75).transform(cutoutForButtonLegs);
+        Geometry3D cutoutForButtonLegs = csg.box3D(14.35, 2, 2, false);
+        cutoutForButtonLegs = csg.translate3DX(0.55).transform(cutoutForButtonLegs);
 
         //cutout for side slide in
-        Geometry3D sideCutout = csg.box3D(1.5, 2, 11, false);
-        sideCutout = csg.translate3DX(8).transform(sideCutout);
+        Geometry3D sideCutout = csg.box3D(2, 2, 8.7, false);
+        sideCutout = csg.translate3DX(7.6).transform(sideCutout);
 
         Geometry3D buttonHolder = csg.difference3D(outerButtonHolder, cutoutForButton, cutoutForButtonLegs, sideCutout);
-        buttonHolder = csg.translate3D(-42.75, 31.75, 54).transform(buttonHolder);
+        buttonHolder = csg.translate3D(-43.375, 31.935, 56.3).transform(buttonHolder);
 
         return buttonHolder;
     }
