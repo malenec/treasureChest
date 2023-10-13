@@ -30,7 +30,7 @@ public class Test
 		Geometry3D grips = top.getGrips(csg);
 		Geometry3D buttonClicker = top.getButtonClicker(csg);
 		Geometry3D completeTopBox = csg.union3D(topBox3D, grips, buttonClicker);
-		csg.view(completeTopBox);
+//		csg.view(completeTopBox);
 
 		//the complete box - closed
 //		completeTopBox = csg.rotate3DY(csg.degrees(180)).transform(completeTopBox);
@@ -39,10 +39,10 @@ public class Test
 //		csg.view(completeBottomAndTop);
 
 		//the complete box - open
-//		completeTopBox = csg.rotate3DY(csg.degrees(180)).transform(completeTopBox);
-//		completeTopBox = csg.rotate3DX(csg.degrees(270)).transform(completeTopBox);
-//		completeTopBox = csg.translate3D(0, 58.5, 99.5).transform(completeTopBox);
-//		Geometry3D completeBottomAndTop = csg.union3D(completeBottomBox, completeTopBox);
-//		csg.view(completeBottomAndTop);
+		completeTopBox = csg.rotate3DY(csg.degrees(180)).transform(completeTopBox);
+		completeTopBox = csg.rotate3DX(csg.degrees(270)).transform(completeTopBox);
+		completeTopBox = csg.translate3D(0, 58.5, 99.5).transform(completeTopBox);
+		Geometry3D completeBottomAndTop = csg.union3D(completeBottomBox, completeTopBox);
+		csg.view(completeBottomAndTop);
 	}
 }

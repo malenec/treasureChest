@@ -33,6 +33,10 @@ public class TopBox {
         cutoutBox = csg.translate3D(0, 0, 20).transform(cutoutBox);
         outerTopCylinder = csg.difference3D(outerTopCylinder, cutoutBox);
 
+        Geometry3D cutoutTopLayerBox = csg.box3D(105, 75, 0.5, false);
+        cutoutTopLayerBox = csg.translate3D(0, 0, -17.5).transform(cutoutTopLayerBox);
+        outerTopCylinder = csg.difference3D(outerTopCylinder, cutoutTopLayerBox);
+
         //inner cylinder size (cutout)
         Geometry3D innerTopCylinder = csg.cylinder3D(70, 100, 360, false);
         innerTopCylinder = csg.rotate3DY(csg.degrees(90)).transform(innerTopCylinder);
