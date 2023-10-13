@@ -6,9 +6,28 @@ import org.abstractica.javacsg.JavaCSG;
 
 public class TopBox {
 
-    public TopBox()
+    private double topChestXLength;
+    private double topChestYWidth;
+    private double topChestZHeight;
+    private Geometry3D completeTopBox;
+
+    public TopBox(JavaCSG csg, double topChestXLength, double topChestYWidth, double topChestZHeight)
     {
+        this.topChestXLength = topChestXLength;
+        this.topChestYWidth = topChestYWidth;
+        this.topChestZHeight = topChestZHeight;
+
+        Geometry3D roundedTopBox = this.getRoundedTopBox(csg);
+        Geometry3D grips = this.getGrips(csg);
+        Geometry3D buttonClicker = this.getButtonClicker(csg);
+        this.completeTopBox = csg.union3D(roundedTopBox, grips, buttonClicker);
     }
+
+    public Geometry3D getCompleteTopBox()
+    {
+        return completeTopBox;
+    }
+
 
     public Geometry3D getSquaredTopBox(JavaCSG csg)
     {

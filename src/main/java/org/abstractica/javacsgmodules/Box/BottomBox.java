@@ -5,14 +5,39 @@ import org.abstractica.javacsg.JavaCSG;
 
 public class BottomBox {
 
-    private double zSize = 12.5;
-    private double cylinderSize = 2.6;
-    private double cylinderXDist = 21.0;
-    private double cylinderYDist = 43.4;
+    private double bottomChestXLength;
+    private double bottomChestYWidth;
+    private double bottomChestZHeight;
+    private Geometry3D completeBottomBox;
 
-    public BottomBox(JavaCSG csg)
+    private double nodeCylinderHeight = 12.5;
+    private double nodeCylinderWidth = 2.6;
+    private double nodeCylinderXDist = 21.0;
+    private double nodeCylinderYDist = 43.4;
+
+    public BottomBox(JavaCSG csg, double bottomChestXLength, double bottomChestYWidth, double bottomChestZHeight)
     {
+        this.bottomChestXLength = bottomChestXLength;
+        this.bottomChestYWidth = bottomChestYWidth;
+        this.bottomChestZHeight = bottomChestZHeight;
+
+        Geometry3D bottomBox3D = this.getBottomBox(csg);
+        Geometry3D cylindersForNodeMCU = this.getCylindersForNodeMCU(csg);
+        Geometry3D microUSBHole = this.getMicroUSBHole(csg);
+        bottomBox3D = csg.difference3D(bottomBox3D, microUSBHole);
+        Geometry3D cylindersForGrips = this.getCylindersForGrips(csg);
+        Geometry3D holesForGrips = this.getHolesForGrips(csg);
+        bottomBox3D = csg.difference3D(bottomBox3D, holesForGrips);
+        Geometry3D buttonHolder = this.getButtonHolder(csg);
+        Geometry3D edgesForLithophane = this.getEdgesForLithophane(csg);
+        this.completeBottomBox = csg.union3D(bottomBox3D, cylindersForNodeMCU, cylindersForGrips, buttonHolder, edgesForLithophane);
     }
+
+    public Geometry3D getCompleteBottomBox()
+    {
+        return completeBottomBox;
+    }
+
 
     public Geometry3D getBottomBox (JavaCSG csg)
     {
@@ -30,12 +55,12 @@ public class BottomBox {
 
     public Geometry3D getCylindersForNodeMCU(JavaCSG csg)
     {
-        Geometry3D cylinders = csg.cylinder3D(cylinderSize, zSize, 360, false);
+        Geometry3D cylinders = csg.cylinder3D(nodeCylinderWidth, nodeCylinderHeight, 360, false);
         cylinders = csg.translate3DZ(4.5).transform(cylinders);
-        Geometry3D cylinder1 = csg.translate3D(0.5*cylinderXDist, 0.5*cylinderYDist, 0).transform(cylinders);
-        Geometry3D cylinder2 = csg.translate3D(-0.5*cylinderXDist, 0.5*cylinderYDist, 0).transform(cylinders);
-        Geometry3D cylinder3 = csg.translate3D(0.5*cylinderXDist, -0.5*cylinderYDist, 0).transform(cylinders);
-        Geometry3D cylinder4 = csg.translate3D(-0.5*cylinderXDist, -0.5*cylinderYDist, 0).transform(cylinders);
+        Geometry3D cylinder1 = csg.translate3D(0.5* nodeCylinderXDist, 0.5* nodeCylinderYDist, 0).transform(cylinders);
+        Geometry3D cylinder2 = csg.translate3D(-0.5* nodeCylinderXDist, 0.5* nodeCylinderYDist, 0).transform(cylinders);
+        Geometry3D cylinder3 = csg.translate3D(0.5* nodeCylinderXDist, -0.5* nodeCylinderYDist, 0).transform(cylinders);
+        Geometry3D cylinder4 = csg.translate3D(-0.5* nodeCylinderXDist, -0.5* nodeCylinderYDist, 0).transform(cylinders);
         cylinders = csg.union3D(cylinder1, cylinder2, cylinder3, cylinder4);
         return cylinders;
     }
