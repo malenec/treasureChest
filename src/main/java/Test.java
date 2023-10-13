@@ -1,8 +1,8 @@
 import org.abstractica.javacsg.Geometry3D;
 import org.abstractica.javacsg.JavaCSG;
 import org.abstractica.javacsg.JavaCSGFactory;
-import org.abstractica.javacsgmodules.Box.BottomBox;
-import org.abstractica.javacsgmodules.Box.TopBox;
+import org.abstractica.javacsgmodules.Box.BottomChest;
+import org.abstractica.javacsgmodules.Box.TopChest;
 
 public class Test
 {
@@ -10,29 +10,45 @@ public class Test
 	{
 		JavaCSG csg = JavaCSGFactory.createDefault();
 
-		//the bottom half of the box
-		BottomBox bottom = new BottomBox(csg, 105, 75, 65);
-//		csg.view(bottom.getCompleteBottomBox());
+			//the bottom half of the chest
+		BottomChest bottom = new BottomChest(csg, 105, 75, 65);
+//		csg.view(bottom.getCompleteBottomChest());
 
-		//the top half of the box
-		TopBox top = new TopBox(csg, 65, 65, 20, true);
-		csg.view(top.getCompleteTopBox());
+			//the top half of the chest
+		TopChest top = new TopChest(csg, 105, 75, 37.5, true);
+//		csg.view(top.getCompleteTopChest());
 
-		//the complete box - closed
-//		Geometry3D completeBottomBox = bottom.getCompleteBottomBox();
-//		Geometry3D completeTopBox = top.getCompleteTopBox();
-//		completeTopBox = csg.rotate3DY(csg.degrees(180)).transform(completeTopBox);
-//		completeTopBox = csg.translate3D(0, 0, 85.75).transform(completeTopBox);
-//		Geometry3D completeBottomAndTop = csg.union3D(completeBottomBox, completeTopBox);
+			//the complete chest
+		Geometry3D completeBottomChest = bottom.getCompleteBottomChest();
+		Geometry3D completeTopChest = top.getCompleteTopChest();
+		if (bottom.getBottomChestXLength() != top.getTopChestXLength())
+		{
+			throw new IllegalArgumentException("The top chest X length must be equal to the bottom chest X length");
+		}
+		if (bottom.getBottomChestYWidth() != top.getTopChestYWidth())
+		{
+			throw new IllegalArgumentException("The top chest Y width must be equal to the bottom chest Y width");
+		}
+
+			//view the complete chest - closed
+//		completeTopChest = csg.rotate3DY(csg.degrees(180)).transform(completeTopChest);
+//		completeTopChest = csg.translate3D(0, 0, bottom.getBottomChestZHeight()+ top.getTopChestZHeight()+0.55).transform(completeTopChest);
+//		Geometry3D completeBottomAndTop = csg.union3D(completeBottomChest, completeTopChest);
 //		csg.view(completeBottomAndTop);
 
-		//the complete box - open
-//		Geometry3D completeBottomBox = bottom.getCompleteBottomBox();
-//		Geometry3D completeTopBox = top.getCompleteTopBox();
-//		completeTopBox = csg.rotate3DY(csg.degrees(180)).transform(completeTopBox);
-//		completeTopBox = csg.rotate3DX(csg.degrees(270)).transform(completeTopBox);
-//		completeTopBox = csg.translate3D(0, 58.5, 99.5).transform(completeTopBox);
-//		Geometry3D completeBottomAndTop = csg.union3D(completeBottomBox, completeTopBox);
+			//view the complete chest - open
+//		completeTopChest = csg.rotate3DZ(csg.degrees(180)).transform(completeTopChest);
+//		completeTopChest = csg.rotate3DX(csg.degrees(90)).transform(completeTopChest);
+//		completeTopChest = csg.translate3DZ(bottom.getBottomChestZHeight()+top.getTopChestYWidth()/2-3).transform(completeTopChest);
+//		if(top.isTopRounded())
+//		{
+//			completeTopChest = csg.translate3DY(bottom.getBottomChestYWidth()+0.95).transform(completeTopChest);
+//		}
+//		else
+//		{
+//			completeTopChest = csg.translate3DY(top.getTopChestZHeight()+bottom.getBottomChestYWidth()/2+0.95).transform(completeTopChest);
+//		}
+//		Geometry3D completeBottomAndTop = csg.union3D(completeBottomChest, completeTopChest);
 //		csg.view(completeBottomAndTop);
 	}
 }
