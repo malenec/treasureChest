@@ -10,11 +10,6 @@ public class BottomBox {
     private double bottomChestZHeight;
     private Geometry3D completeBottomBox;
 
-    private double nodeCylinderHeight = 12.5;
-    private double nodeCylinderWidth = 2.6;
-    private double nodeCylinderXDist = 21.0;
-    private double nodeCylinderYDist = 43.4;
-
     public BottomBox(JavaCSG csg, double bottomChestXLength, double bottomChestYWidth, double bottomChestZHeight)
     {
         this.bottomChestXLength = bottomChestXLength;
@@ -24,12 +19,11 @@ public class BottomBox {
         Geometry3D bottomBox3D = this.getBottomBox(csg);
         Geometry3D cylindersForNodeMCU = this.getCylindersForNodeMCU(csg);
         Geometry3D microUSBHole = this.getMicroUSBHole(csg);
-        bottomBox3D = csg.difference3D(bottomBox3D, microUSBHole);
         Geometry3D cylindersForGrips = this.getCylindersForGrips(csg);
         Geometry3D holesForGrips = this.getHolesForGrips(csg);
-        bottomBox3D = csg.difference3D(bottomBox3D, holesForGrips);
         Geometry3D buttonHolder = this.getButtonHolder(csg);
         Geometry3D edgesForLithophane = this.getEdgesForLithophane(csg);
+        bottomBox3D = csg.difference3D(bottomBox3D, microUSBHole, holesForGrips);
         this.completeBottomBox = csg.union3D(bottomBox3D, cylindersForNodeMCU, cylindersForGrips, buttonHolder, edgesForLithophane);
     }
 
@@ -52,9 +46,13 @@ public class BottomBox {
         return totalBottomBox;
     }
 
-
     public Geometry3D getCylindersForNodeMCU(JavaCSG csg)
     {
+        double nodeCylinderHeight = 12.5;
+        double nodeCylinderWidth = 2.6;
+        double nodeCylinderXDist = 21.0;
+        double nodeCylinderYDist = 43.4;
+
         Geometry3D cylinders = csg.cylinder3D(nodeCylinderWidth, nodeCylinderHeight, 360, false);
         cylinders = csg.translate3DZ(4.5).transform(cylinders);
         Geometry3D cylinder1 = csg.translate3D(0.5* nodeCylinderXDist, 0.5* nodeCylinderYDist, 0).transform(cylinders);
