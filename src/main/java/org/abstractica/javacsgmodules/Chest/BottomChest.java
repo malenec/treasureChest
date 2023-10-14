@@ -1,4 +1,4 @@
-package org.abstractica.javacsgmodules.Box;
+package org.abstractica.javacsgmodules.Chest;
 
 import org.abstractica.javacsg.Geometry3D;
 import org.abstractica.javacsg.JavaCSG;

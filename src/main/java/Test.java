@@ -1,8 +1,8 @@
 import org.abstractica.javacsg.Geometry3D;
 import org.abstractica.javacsg.JavaCSG;
 import org.abstractica.javacsg.JavaCSGFactory;
-import org.abstractica.javacsgmodules.Box.BottomChest;
-import org.abstractica.javacsgmodules.Box.TopChest;
+import org.abstractica.javacsgmodules.Chest.BottomChest;
+import org.abstractica.javacsgmodules.Chest.TopChest;
 
 public class Test
 {
