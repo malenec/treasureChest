@@ -28,6 +28,10 @@ public class BottomChest {
             throw new IllegalArgumentException("The bottom chest X length cannot be less than 85 mm with the current components");
         }
         this.bottomChestYWidth = bottomChestYWidth;
+        if(bottomChestYWidth < 65)
+        {
+            throw new IllegalArgumentException("The bottom chest Y width cannot be less than 85 mm with the current components");
+        }
         this.bottomChestZHeight = bottomChestZHeight;
 
         this.bottomChestInnerXLength = bottomChestXLength-(bottomBoxThickness*2);
@@ -65,6 +69,8 @@ public class BottomChest {
         double nodeCylinderXDist = 21.0;
         double nodeCylinderYDist = 43.4;
 
+        double nodeTotalYWidth = 49;
+
         Geometry3D cylinders = csg.cylinder3D(nodeCylinderWidth, nodeCylinderHeight, 360, false);
         cylinders = csg.translate3DZ(bottomBoxThickness).transform(cylinders);
         Geometry3D cylinder1 = csg.translate3D(0.5* nodeCylinderXDist, 0.5* nodeCylinderYDist, 0).transform(cylinders);
@@ -72,6 +78,7 @@ public class BottomChest {
         Geometry3D cylinder3 = csg.translate3D(0.5* nodeCylinderXDist, -0.5* nodeCylinderYDist, 0).transform(cylinders);
         Geometry3D cylinder4 = csg.translate3D(-0.5* nodeCylinderXDist, -0.5* nodeCylinderYDist, 0).transform(cylinders);
         cylinders = csg.union3D(cylinder1, cylinder2, cylinder3, cylinder4);
+        cylinders = csg.translate3D(0,bottomChestInnerYWidth/2-nodeTotalYWidth/2-5.5,0).transform(cylinders);
         return cylinders;
     }
 

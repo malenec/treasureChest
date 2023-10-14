@@ -25,6 +25,10 @@ public class TopChest {
             throw new IllegalArgumentException("The top chest X length cannot be less than 85 mm with the current components");
         }
         this.topChestYWidth = topChestYWidth;
+        if(topChestYWidth < 65)
+        {
+            throw new IllegalArgumentException("The top chest Y width cannot be less than 65 mm with the current components");
+        }
         this.topChestZHeight = topChestZHeight;
         this.isTopRounded = isTopRounded;
 
