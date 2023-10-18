@@ -89,8 +89,8 @@ public class TopChest {
 
     public Geometry3D getGrips(JavaCSG csg)
     {
-        double gripXLength = 4;
-        double gapBetweenGripPair = 6;
+        double gripXLength = BottomChest.getGripXLength();
+        double gapBetweenGripPair = BottomChest.getGapBetweenGripPair();
 
             //outer circle
         Geometry2D outerCircle = csg.circle2D(8.5, 360);

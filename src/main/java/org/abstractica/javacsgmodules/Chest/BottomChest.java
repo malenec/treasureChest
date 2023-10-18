@@ -13,8 +13,8 @@ public class BottomChest {
     private double bottomChestInnerXLength;
     private double bottomChestInnerYWidth;
     private double bottomChestInnerZHeight;
-    private double gripXLength = 4;
-    private double gapBetweenGripPair = 6;
+    static private double gripXLength = 4;
+    static private double gapBetweenGripPair = 6;
     private double buttonHolderXLength = 15.45;
     private double buttonHolderYWidth = 8.33;
     private double buttonHolderZHeight = 7.8;
@@ -30,7 +30,7 @@ public class BottomChest {
         this.bottomChestYWidth = bottomChestYWidth;
         if(bottomChestYWidth < 65)
         {
-            throw new IllegalArgumentException("The bottom chest Y width cannot be less than 85 mm with the current components");
+            throw new IllegalArgumentException("The bottom chest Y width cannot be less than 65 mm with the current components");
         }
         this.bottomChestZHeight = bottomChestZHeight;
 
@@ -193,4 +193,11 @@ public class BottomChest {
         return bottomChestZHeight;
     }
 
+    public static double getGripXLength() {
+        return gripXLength;
+    }
+
+    public static double getGapBetweenGripPair() {
+        return gapBetweenGripPair;
+    }
 }
